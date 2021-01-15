@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+    #formResponses {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    }
+    
+    #formResponses td, #formResponses th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    }
+    
+    #formResponses tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #formResponses th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+    }
+    </style>
+  </head>
+  <body>
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Gmail bulk save completed</h1>
+    <hr class="my-4">
+  <p>Your emails have been saved to a new folder in your Google Drive, which is linked below</p>
+  </div>
+</div>
+<p>
+<b><a href="<?= folderUrl ?>">Click here</a></b> to open the folder
+</p>
+</body>
+</html>
