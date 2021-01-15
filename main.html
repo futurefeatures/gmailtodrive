@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="Stylesheet.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  </head>
+<body>
+<script>
+$(document).ready(function(){
+  $("#submitButton").click(function(){
+    $("#content").hide();
+  });
+  $("#submitButton").click(function(){
+    $("#finishedContent").show();
+  });
+  $("#reloadButton").click(function(){
+    $("#finishedContent").hide();
+  });
+  $("#reloadButton").click(function(){
+    $("#content").show();
+  });
+});
+</script>
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+  <h1 class="display-4">Gmail to Drive</h1>
+  <small id="futureFeatures" class="form-text text-muted">A bulk email save app by Future Features</small>
+</div>
+<hr class="my-4">
+<div class="container" id="content">
+  <div class="row" id="labelText">
+    <div class="col-sm-12">
+      <p class="lead">
+      Select the Gmail label containing the emails you want to save
+      </p>
+    </div>
+  </div>
+  <div class="row" id="label-select">
+    <div class="col-sm-12">
+    <?
+    var labels = getGmailLabels();
+    ?>
+      <div id="select">
+        <select class="custom-select" id="label">
+          <? for (var i = 0; i < labels.length; ++i) { ?>
+          <option><?!= labels[i].getName() ?></option>
+          <? } ?>
+        </select>
+      </div>
+    </div>
+  </div><br>
+  <div class="row" id="formatText">
+    <div class="col-sm-12">
+      <p class="lead">
+        Select the format that you want to save the emails in
+      </p>
+    </div>
+  </div>
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+      <input type="radio" name="options" id="pdf" autocomplete="off" value="pdf" checked>
+      PDF
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="gdoc" autocomplete="off" value="gdoc">
+      Google Doc
+    </label>
+  </div><br><br>
+  <hr class="my-4">
+  <div class="row" id="button">
+    <div class="col-sm-12">
+    <input
+      type="button"
+      class="btn btn-primary"
+      id="submitButton"
+      onclick="google.script.run.exportEmails(
+      document.getElementById('label').value,
+      $('input[name=options]:checked').val());"
+      value="Save emails"
+      />
+    </div>
+  </div>
+</div> 
+<div class="container" id="finishedContent" style="display: none;">
+  <div class="row" id="success">
+    <div class="col-sm-12">
+      <p class="lead">
+        Your emails are now being processed. You'll receive an email when they're ready with a link to the folder
+      </p>
+    </div>
+  </div>
+  <br>
+  <div class="row" id="reloadButton">
+    <div class="col-sm-12">
+    <input
+      type="button"
+      class="btn btn-info"
+      id="submitButton"
+      onclick=""
+      value="Select another label"
+      />
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
